@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-time Face Detection</title>
+</head>
+<body>
+    <!-- Status message to display the current state of the application -->
+    <div id="status">Initializing...</div>
+    
+    <!-- Container for the video feed and face detection overlay -->
+    <div class="container">
+        <video id="webcam" autoplay playsinline width="640" height="480"></video>
+        <div id="overlay"></div>
+    </div>
+    
+    <!-- Hidden canvas used to capture frames from the video feed -->
+    <canvas id="canvas" style="display: none;"></canvas>
+    
+    <!-- Information about the number of faces detected -->
+    <div id="info">
+        <p>Faces detected: <span id="faceCount">0</span></p>
+    </div>
+
+    <script>
+        let stream = null;
+
+        // Function to start the camera and face detection
+        async function startCameraAndDetection() {
+            try {
+                document.getElementById('status').textContent = 'Starting camera...';
+                
+                // Request access to the user's camera
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: 640, 
+                        height: 480 
+                    } 
+                });
+                
+                // Display the video feed in the <video> element
+                document.getElementById('webcam').srcObject = stream;
+                document.getElementById('status').textContent = 'Camera started. Detecting faces...';
+
+                // Start face detection at regular intervals
+                setInterval(detectFaces, 500); // Detect every 500ms
+            } catch (err) {
+                console.error('Camera error:', err);
+                document.getElementById('status').textContent = 'Failed to access camera. Please check permissions.';
+            }
+        }
+
+        // Function to detect faces in the video feed
+        async function detectFaces() {
+            if (!stream) return;
+            
+            try {
+                const video = document.getElementById('webcam');
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Capture a frame from the video feed
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0);
+                
+                // Convert the frame to a base64-encoded image
+                const imageData = canvas.toDataURL('image/jpeg');
+                
+                // Send the image to the server for face detection
+                const response = await fetch('/detect', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ image: imageData })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Draw face detection boxes and update the face count
+                    drawFaceBoxes(result.faces);
+                    document.getElementById('faceCount').textContent = result.count;
+                    document.getElementById('status').textContent = `Detecting faces... Found: ${result.count}`;
+                } else {
+                    console.error('Detection failed:', result.error);
+                }
+                
+            } catch (error) {
+                console.error('Detection error:', error);
+            }
+        }
+
+        // Function to draw face detection boxes on the overlay
+        function drawFaceBoxes(faces) {
+            const overlay = document.getElementById('overlay');
+            
+            // Clear any existing boxes
+            overlay.innerHTML = '';
+            
+            // Draw new boxes for each detected face
+            faces.forEach(face => {
+                const box = document.createElement('div');
+                box.className = 'face-box';
+                box.style.left = face.x + 'px';
+                box.style.top = face.y + 'px';
+                box.style.width = face.width + 'px';
+                box.style.height = face.height + 'px';
+                overlay.appendChild(box);
+            });
+        }
+
+        // Automatically start the camera and detection when the page loads
+        window.addEventListener('load', () => {
+            startCameraAndDetection();
+        });
+    </script>
+</body>
+</html>

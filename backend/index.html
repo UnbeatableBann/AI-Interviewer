@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Assistant</title>
+    <script>
+        function speakText(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(utterance);
+        }
+
+        async function startInterview() {
+            const jobProfile = document.getElementById('job_profile').value;
+            const topic = document.getElementById('topic').value;
+
+            const response = await fetch('/start_interview', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ job_profile: jobProfile, topic: topic })
+            });
+
+            const data = await response.json();
+            if (data.session_id) {
+                sessionStorage.setItem('session_id', data.session_id);
+                const question = data.first_question || 'No questions available.';
+                document.getElementById('question').innerText = question;
+                speakText(question); // Speak the question aloud
+            } else {
+                alert('Error starting interview.');
+            }
+        }
+
+        async function submitAnswer() {
+            const sessionId = sessionStorage.getItem('session_id');
+            const userAnswer = document.getElementById('user_answer').value;
+
+            const response = await fetch('/answer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ session_id: sessionId, user_answer: userAnswer })
+            });
+
+            const data = await response.json();
+            if (data.action === 'followup') {
+                const followupQuestion = data.followup_question;
+                document.getElementById('question').innerText = followupQuestion;
+                speakText(followupQuestion); // Speak the follow-up question aloud
+            } else if (data.action === 'next') {
+                const nextQuestion = data.next_question;
+                document.getElementById('question').innerText = nextQuestion;
+                speakText(nextQuestion); // Speak the next question aloud
+            } else if (data.action === 'end') {
+                alert('Interview ended. Check console for history.');
+                console.log(data.history);
+            } else {
+                alert('Error submitting answer.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Interview Assistant</h1>
+    <div>
+        <label for="job_profile">Job Profile:</label>
+        <input type="text" id="job_profile" placeholder="e.g., Software Engineer">
+    </div>
+    <div>
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" placeholder="e.g., Data Structures">
+    </div>
+    <button onclick="startInterview()">Start Interview</button>
+    <hr>
+    <div>
+        <p id="question">Your question will appear here.</p>
+        <textarea id="user_answer" placeholder="Type your answer here..."></textarea>
+        <button onclick="submitAnswer()">Submit Answer</button>
+    </div>
+</body>
+</html>

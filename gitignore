@@ -1,0 +1,40 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+newenv/
+venv/
+
+# Flask static and templates folders (only if they contain generated or test data)
+# static/
+# templates/
+
+# Temporary/test folders
+try/
+
+# Environment variables
+.env
+
+# Editor/IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs & uploads
+*.log
+*.tmp
+uploads/
+
+# Cache
+*.cache
+
+# Optional - comment out if you *do* want to keep app/index/etc tracked
+# app/
+# index

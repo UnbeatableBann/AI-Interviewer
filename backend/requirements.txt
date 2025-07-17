@@ -1,0 +1,13 @@
+supabase
+flask
+flask_cors
+flask_sqlalchemy
+python-dotenv
+requests
+rapidfuzz
+gtts
+SpeechRecognition
+pydub
+numpy
+opencv-python
+Pillow
