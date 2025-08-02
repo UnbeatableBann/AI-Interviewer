@@ -10,11 +10,11 @@ AI Interviewer is an intelligent platform designed to simulate real-life intervi
 - HR dashboard for managing interviews
 - Real-time feedback and scoring
 - Modern, interactive frontend (React + TypeScript)
-- RESTful backend (Flask)
+- RESTful backend (Flask, FastAPI)
 
 ## Tech Stack
 - **Frontend:** React, TypeScript, Vite
-- **Backend:** Python, Flask
+- **Backend:** Python, Flask, FastAPI
 - **Face Detection:** Custom Python module
 - **Authentication:** Appwrite/Supabase (configurable)
 
@@ -22,11 +22,11 @@ AI Interviewer is an intelligent platform designed to simulate real-life intervi
 ```
 AI Interviewer/
 ├── backend/
-│   ├── app.py                # Main Flask app
+│   ├── app.py                # Main FastAPI app
 │   ├── appwrite_client.py    # Appwrite integration
 │   ├── face_detection/       # Face detection module
-│   ├── static/               # Static files (JS, CSS)
-│   ├── templates/            # HTML templates
+│   ├── logger.py             # Logging
+│   ├── redis_client.py       # Redis integration
 │   └── ...
 ├── frontend/
 │   ├── src/
