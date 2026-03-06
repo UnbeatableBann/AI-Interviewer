@@ -1,0 +1,26 @@
+
+# Enhancement (not needed now, but improve app)
+* Add client ID and client secret support, if want External identity providers (Google, Auth0, Kinde, etc.) or App-level authentication in your own system but don't needed.
+* Implement rate limiting to prevent brute-force login:
+
+  * Redis-based rate limiting: block login after 5 failed attempts in 10 minutes per IP and/or email.
+
+
+# Improvement (Make changes earlier)
+## OTP & email handling
+* Make resend-OTP safe (throttle requests so users cannot spam OTP requests every 2 seconds).
+
+
+## Error handling & responses
+
+* Replace ad-hoc `{'error': '...'}` responses from CRUD functions with proper error propagation and handling.
+* If a CRUD function returns an error payload like `{'error': '...'}`, handle it explicitly and convert it into the appropriate `HTTPException`.
+
+
+# To Make Quality Questions
+- deployed this project n render but redis as managed service. Now deploy on vps or Kubernetes.
+1. Mistral scoring and question generation
+
+we have decided new arch. for question generation.
+Arch:
+The goal is to build a fully agentic AI question generation pipeline for job interviews. The system starts by retrieving a job description from the database, extracting the key skills and requirements from it. In parallel, it searches the web for relevant interview questions and checks a vector database for previously stored questions to enrich the context. These two sources of information are combined to provide a comprehensive context, which is then fed to a large language model (such as Mistral) to generate high-quality interview questions tailored to the job. After generation, the questions are filtered, deduplicated, and reranked to ensure quality. If the vector database does not contain relevant prior questions, the system can update it with new entries for future use. This entire process is designed to run asynchronously, with each step functioning as a modular agent, enabling a robust, scalable, and fully automated multi-agent workflow suitable for deployment in production.

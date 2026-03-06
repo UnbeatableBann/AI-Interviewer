@@ -1,0 +1,32 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+newvenv/
+fastvenv/
+*.venv/
+
+# Docker files (optional to ignore previous images)
+*.tar
+*.log
+
+# Git files
+.git
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment/config files
+.env

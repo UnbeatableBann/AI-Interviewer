@@ -1,0 +1,12 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<h1>Your OTP Code</h1>
+<p>Hello,</p>
+<p>Use the following One-Time Password (OTP) to complete your verification process:</p>
+
+<div class="otp-box">{{ otp }}</div>
+
+<p>This code will expire in <b>{{ expiry_minutes }} minutes</b>. Please do not share this code with anyone.</p>
+<p>If you didn’t request this OTP, you can safely ignore this email.</p>
+{% endblock %}
