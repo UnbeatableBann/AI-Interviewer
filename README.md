@@ -1,6 +1,6 @@
-# Interviewer Intelligence Platform (IIP)
+# Susan- Interviewer Intelligence Platform (IIP)
 
-The **Interviewer Intelligence Platform (IIP)** is a production-grade, enterprise-ready full-stack application for AI-driven adaptive interviewing, continuous skill modeling, and candidates' evaluation.
+The **Susan** is a production-grade, enterprise-ready full-stack application for AI-driven adaptive interviewing, continuous skill modeling, and candidates' evaluation.
 
 The repository is structured as a monorepo containing a high-performance Python backend and a modern Next.js/React frontend.
 
