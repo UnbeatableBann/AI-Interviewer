@@ -6,7 +6,7 @@ The repository is structured as a monorepo containing a high-performance Python 
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ``` bash
 AI-Interviewer/
@@ -21,7 +21,7 @@ AI-Interviewer/
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Backend
 
@@ -44,7 +44,7 @@ AI-Interviewer/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these steps to get the entire workspace up and running locally.
 
@@ -52,14 +52,14 @@ Follow these steps to get the entire workspace up and running locally.
 
 Ensure you have the following installed on your machine:
 
-1. [Docker & Docker Compose](https://www.docker.com/products/docker-desktop/)
-2. [Python 3.12](https://www.python.org/downloads/) & [`uv`](https://docs.astral.sh/uv/)
-3. [Node.js (v18+) & npm](https://nodejs.org/)
-4. `make` utility (optional, but highly recommended for convenience)
+1. Docker & Docker Compose
+2. Python 3.12 & uv
+3. Node.js (v18+) & npm
+4. Make utility (optional, but highly recommended for convenience)
 
 ---
 
-### ⚙️ Installation & Running
+### Installation & Running
 
 #### 1. Spin up Infrastructure (Docker)
 
@@ -89,14 +89,14 @@ make init-db
 
 #### 4. Run the Development Servers
 
-- **Start Backend API Gateway** (runs on [http://localhost:8000](http://localhost:8000)):
+- **Start Backend API Gateway** (runs on <http://localhost:8000>):
 
   ```bash
   make run
   # Or: cd backend && uv run uvicorn src.main:app --port 8000
   ```
 
-- **Start Frontend Next.js Client** (runs on [http://localhost:3000](http://localhost:3000)):
+- **Start Frontend Next.js Client** (runs on <http://localhost:3000>):
 
   ```bash
   make run-frontend
@@ -105,7 +105,7 @@ make init-db
 
 ---
 
-## 🛠️ Command Matrix (Makefile Cheat Sheet)
+## Command Matrix (Makefile Cheat Sheet)
 
 | Command | Description | Directory Context |
 | :--- | :--- | :--- |
@@ -123,9 +123,9 @@ make init-db
 
 ---
 
-## 📖 Sub-module References
+## Sub-module References
 
 For detailed setup, architectural specifications, and implementation details of individual layers, check their respective documentation:
 
-- 🐍 **[Backend README](file:///C:/Users/Shadab/Downloads/AI-Interviewer/backend/README.md)**
-- ⚛️ **[Frontend README](file:///C:/Users/Shadab/Downloads/AI-Interviewer/frontend/README.md)**
+- **[Backend README](file:///C:/Users/Shadab/Downloads/AI-Interviewer/backend/README.md)**
+- **[Frontend README](file:///C:/Users/Shadab/Downloads/AI-Interviewer/frontend/README.md)**
