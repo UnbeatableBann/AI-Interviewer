@@ -55,7 +55,7 @@ Ensure you have the following installed on your machine:
 1. Docker & Docker Compose
 2. Python 3.12 & uv
 3. Node.js (v18+) & npm
-4. Make utility (optional, but highly recommended for convenience)
+4. Make utility (highly recommended for convenience)
 
 ---
 
