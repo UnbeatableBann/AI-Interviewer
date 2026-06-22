@@ -1,0 +1,41 @@
+# Auto-detect text files and perform LF normalization on checkin
+* text=auto
+
+# Explicitly declare text files to be normalized and use LF line endings
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
+*.json text
+*.css text
+*.html text
+*.md text
+*.py text
+*.toml text
+*.yml text
+*.yaml text
+*.ini text
+*.env text
+*.txt text
+Makefile text
+
+# Shell scripts must always use LF
+*.sh text eol=lf
+
+# Windows batch files must always use CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Denote binary files (do not normalize line endings)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.mp3 binary
+*.mp4 binary
+*.wav binary
